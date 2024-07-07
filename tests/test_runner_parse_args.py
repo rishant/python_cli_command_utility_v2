@@ -1,5 +1,5 @@
-# tests/test_runner.py
-import pytest
+# tests/test_runner_parse_args.py
+import unittest
 from runner import parse_args
 
 
@@ -19,5 +19,5 @@ def test_parse_args_default_json_data():
 
 def test_parse_args_missing_command():
     args = ['--json-data', '{"order_id": "123", "item": "book", "quantity": 2}']
-    with pytest.raises(SystemExit):
+    with unittest.TestCase.assertRaises(unittest.TestCase, SystemExit):
         parse_args(args)

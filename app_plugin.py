@@ -14,7 +14,8 @@ class AppCliEntryPoint:
     def __init__(self):
         self.router_modules = {
             'OrderRouter': 'routers.order_router.OrderRouter',
-            'PaymentRouter': 'routers.payment_router.PaymentRouter'
+            'PaymentRouter': 'routers.payment_router.PaymentRouter',
+            'UserRouter': 'routers.user_router.UserRouter'
         }
         self.routers = {}
 
@@ -57,6 +58,6 @@ class AppCliEntryPoint:
             # Method expects arbitrary keyword arguments
             result = method(router, **data)
 
-        print(result)
+        # print(result)
         return result
 

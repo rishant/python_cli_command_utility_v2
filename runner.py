@@ -14,7 +14,7 @@ def parse_args(cli_args):
 
 if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
-    print(args)
+    # print(args)
 
     cli = AppCliEntryPoint()
     result = cli.execute(args)

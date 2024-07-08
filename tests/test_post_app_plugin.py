@@ -16,7 +16,7 @@ class TestUserAppCliEntryPoint(unittest.TestCase):
         cli = AppCliEntryPoint()
         args = type('', (), {})()
         args.command = 'get_external_posts'
-        args.api_uri = 'https://jsonplaceholder.typicode.com/posts}'
+        args.api_uri = 'https://jsonplaceholder.typicode.com/posts'
         args.json_data = '{}'
         result = cli.execute(args)
         assert result is not None

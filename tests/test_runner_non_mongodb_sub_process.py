@@ -16,8 +16,7 @@ class TestRunner(unittest.TestCase):
         CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
         self.runner_path = os.path.normpath(os.path.join(CURRENT_DIR, '..', 'runner.py'))
 
-    def test_main_process_payment(self, mock_user_router_init):
-        mock_user_router_init.return_value = None
+    def test_main_process_payment(self):
         command = ['python', self.runner_path, '--command', 'process_payment', '--json-data',
                    '{"payment_id": "456", "amount": 100.0}']
         result = subprocess.run(command, capture_output=True, text=True)

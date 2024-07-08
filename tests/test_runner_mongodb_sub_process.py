@@ -24,19 +24,17 @@ class TestRunner(unittest.TestCase):
 
         # Define the command and JSON data
         command = 'create_user'
+        mongo_uri = 'mongodb://localhost:27017/'
         json_data = json.dumps({
-            'mongo_uri': 'mongodb://localhost:27017/',
-            'user_data': {
                 # '_id': '668aeef3bb832f5d1fbee458',
                 'username': 'john_doe',
                 'email': 'john@example.com',
                 'password': 'password123'
-            }
         })
 
         # Run the runner.py script using subprocess
         result = subprocess.run(
-            [sys.executable, '../runner.py', '--command', command, '--json-data', json_data],
+            [sys.executable, '../runner.py', '--command', command, '--mongo-uri', mongo_uri, '--json-data', json_data],
             capture_output=True,
             text=True
         )

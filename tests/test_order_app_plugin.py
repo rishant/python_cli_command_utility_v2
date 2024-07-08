@@ -9,6 +9,7 @@ class TestOrderAppCliEntryPoint(unittest.TestCase):
         cli = AppCliEntryPoint()
         args = type('', (), {})()  # Creating an empty object
         args.command = 'create_order'
+        args.mongo_uri = 'mongodb://localhost:27017/'
         args.json_data = '{"order_id": "123", "item": "book", "quantity": 2}'
         result = cli.execute(args)
         assert result == 'Order created: 123, book, 2'

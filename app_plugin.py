@@ -31,34 +31,41 @@ class AppCliEntryPoint:
                 raise ValueError("Unknown router")
         return self.routers[router_name]
 
-    def execute(self, args):
+    def parse_and_merge_json_data(self, args):
+        if hasattr(args, 'json_data'):
+            try:
+                args.json_data = json.loads(args.json_data)
+            except json.JSONDecodeError:
+                raise ValueError("Invalid JSON data")
 
+        additional_args = vars(args).copy()
+        return additional_args
+
+    def determine_method_call(self, method, router, json_data):
+        method_signature = signature(method)
+        json_param_names = {'json_data', 'json_request', 'json_args', 'request_body'}
+
+        if len(method_signature.parameters) == 1:
+            return method(router)
+        else:
+            params = list(method_signature.parameters.values())
+            if len(params) == 2 and params[1].name in json_param_names:
+                return method(router, json_data['json_data'])
+            else:
+                kwargs = {param: json_data[param] for param in method_signature.parameters if param in json_data}
+                return method(router, **kwargs)
+
+    def execute(self, args):
         command = args.command
-        json_data = args.json_data
 
         if command not in command_map:
             raise ValueError("Unknown command")
 
-        try:
-            data = json.loads(json_data)
-        except json.JSONDecodeError:
-            raise ValueError("Invalid JSON data")
-
+        json_data = self.parse_and_merge_json_data(args)
         method = command_map[command]
         router_name = method.__qualname__.split('.')[0]
         router = self.get_router(router_name)
+        result = self.determine_method_call(method, router, json_data)
 
-        method_signature = signature(method)
-        if len(method_signature.parameters) == 1:
-            # Only self is expected
-            result = method(router)
-        elif len(method_signature.parameters) == 2 and list(method_signature.parameters.values())[1].name == 'request_body':
-            # Method expects a request body parameter
-            result = method(router, data)
-        else:
-            # Method expects arbitrary keyword arguments
-            result = method(router, **data)
-
-        # print(result)
         return result
 

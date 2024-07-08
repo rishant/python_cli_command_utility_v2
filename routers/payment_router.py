@@ -12,10 +12,10 @@ class PaymentRouter:
         return f"Payment refunded: {request_body}"
 
     @command('process_payment2')
-    def process_payment(self, payment_id, amount):
-        return f"Payment processed: {payment_id}, {amount}"
+    def process_payment(self, request_body):
+        return f"Payment processed: {request_body['payment_id']}, {request_body['amount']}"
 
     @command('refund_payment2')
-    def refund_payment(self, payment_id):
-        return f"Payment refunded: {payment_id}"
+    def refund_payment(self, request_body):
+        return f"Payment refunded: {request_body['payment_id']}"
 

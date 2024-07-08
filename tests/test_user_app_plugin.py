@@ -25,10 +25,8 @@ class TestUserAppCliEntryPoint(unittest.TestCase):
         # Setup test arguments
         args = type('', (), {})()
         args.command = 'create_user'
-        args.json_data = json.dumps({
-            'mongo_uri': 'mongodb://localhost:27017/',
-            'user_data': {'username': 'john_doe', 'email': 'john@example.com', 'password': 'password123'}
-        })
+        args.mongo_uri = 'mongodb://localhost:27017/'
+        args.json_data = json.dumps({'user_data': {'username': 'john_doe', 'email': 'john@example.com', 'password': 'password123'}})
 
         # Execute the CLI command
         result = cli.execute(args)
@@ -61,8 +59,8 @@ class TestUserAppCliEntryPoint(unittest.TestCase):
         # Setup test arguments
         args = type('', (), {})()
         args.command = 'get_user'
+        args.mongo_uri = 'mongodb://localhost:27017/'
         args.json_data = json.dumps({
-            'mongo_uri': 'mongodb://localhost:27017/',
             'username': 'john_doe'
         })
 

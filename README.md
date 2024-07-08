@@ -1,6 +1,6 @@
-cmd:/> python runner.py --command create_order --json-data "{\"order_id\": \"123\", \"item\": \"book\", \"quantity\": 2}" 
+cmd:/> python runner.py --command odr_create_order --json-data "{\"order_id\": \"123\", \"item\": \"book\", \"quantity\": 2}" 
 
-cmd:/> python runner.py --command create_order --json-data '{"order_id": "123", "item": "book", "quantity": 2}'
+cmd:/> python runner.py --command odr_create_order --json-data '{"order_id": "123", "item": "book", "quantity": 2}'
 
 cmd:/> python runner.py --command cancel_order --json-data '{"order_id": "123"}'
 

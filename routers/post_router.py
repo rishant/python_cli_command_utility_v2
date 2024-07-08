@@ -11,3 +11,8 @@ class PostRouter:
     def get_posts(self):
         response = requests.get(f"{self.BASE_URL}/posts")
         return response.json()
+
+    @command('get_external_posts')
+    def get_posts(self, api_uri):
+        response = requests.get(f"{api_uri}")
+        return response.json()

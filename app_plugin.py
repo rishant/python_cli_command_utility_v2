@@ -15,7 +15,8 @@ class AppCliEntryPoint:
         self.router_modules = {
             'OrderRouter': 'routers.order_router.OrderRouter',
             'PaymentRouter': 'routers.payment_router.PaymentRouter',
-            'UserRouter': 'routers.user_router.UserRouter'
+            'UserRouter': 'routers.user_router.UserRouter',
+            'PostRouter': 'routers.post_router.PostRouter'
         }
         self.routers = {}
 
